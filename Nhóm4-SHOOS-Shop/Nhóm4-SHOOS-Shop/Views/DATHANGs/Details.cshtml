@@ -1,0 +1,67 @@
+﻿@model Nhóm4_SHOOS_Shop.Models.DATHANG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DATHANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYDAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYDAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GHICHU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GHICHU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TONGTIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONGTIEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIAOHANG.TENTAIXE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIAOHANG.TENTAIXE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KHACHHANG.HOTEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KHACHHANG.HOTEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KHUYENMAI.TENKM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KHUYENMAI.TENKM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MADH }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

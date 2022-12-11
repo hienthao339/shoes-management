@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Nhóm4_SHOOS_Shop.Models.SANPHAM>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<div class="row d-flex flex-row p-4">
+    @foreach (var item in Model)
+    {
+        <div class="row w-50 p-3">
+            <div class="col-5">
+                <img src="~/Images/@item.HINH" class="img-fluid" />
+            </div>
+            <div class="col-7 px-2 d-flex flex-column justify-content-between">
+                <div class="top-card-container">
+                    <h3>@Html.ActionLink(item.TENSP, "Product", "Home", new {id = item.MASP}, new {@class="fw-bold text-decoration-none text-dark"})</h3>
+                    <div class="d-flex flex-row mb-2">
+                        <b>Màu sắc:</b>
+                        <div class="mx-2">@item.MAUSAC</div>
+                    </div>
+                    <div class="d-flex flex-row mb-2">
+                        <b>Kích cỡ:</b>
+                        <div class="mx-2">@item.KICHCO</div>
+                    </div>
+                    <div class="d-flex flex-row mb-2">
+                        <b>Số lượng:</b>
+
+
+                    </div>
+                </div>
+                <div class="bot-card-container text-end">
+                    <div class="fs-2 fw-light">@item.GIA VND</div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

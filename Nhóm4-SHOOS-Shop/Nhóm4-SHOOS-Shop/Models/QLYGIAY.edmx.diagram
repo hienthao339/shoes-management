@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96b3ab60ecb8406d93e00db95c6d2284" Name="Diagram1">
+        <EntityTypeShape EntityType="DBShoesModel.CHITIETDH" Width="1.5" PointX="12" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.DATHANG" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.GIAOHANG" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.HOADON" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.KHACHHANG" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.KHUYENMAI" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.NHACUNGCAP" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.SANPHAM" Width="1.5" PointX="9.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.THANHTOAN" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.THE" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBShoesModel.THUONGHIEU" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
+        <AssociationConnector Association="DBShoesModel.FK_MADH_DATHANG_CTDH" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MASP_SANPHAM_DH" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MAGH_GIAOHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MAKH_KHACHHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MAKM_KHUYENMAI" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MATT_THANHTOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MAHD_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MANV_NHANVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MANCC_NHACUNGCAP" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MATH_THUONGHIEU" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MATHE_THE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,43 @@
+﻿@model Nhóm4_SHOOS_Shop.Models.THE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>THE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SOTHE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOTHE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TENNGANHANG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENNGANHANG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHUTAIKHOAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHUTAIKHOAN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MATHE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

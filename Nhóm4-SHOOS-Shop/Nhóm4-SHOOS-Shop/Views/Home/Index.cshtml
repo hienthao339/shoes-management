@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Nhóm4_SHOOS_Shop.Models.SANPHAM>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="text-center">
+    <img src="~/Images/bg-2.jpg" class="w-50 img-fluid" />
+    <div class="position-absolute w-50 h-100 end-0" style="z-index: -1; top: 3.7em; background-image: url(/Images/christmas.jpg)"></div>
+    <div class="p-5 position-absolute w-50 text-start"
+         style="top: 5em; left: 2em">
+        <span class="fs-1"style="color: #fe612e">Giáng Sinh 2022</span> <br />
+        <span class="fw-bolder" style="font-size: 50px; color: #075b5c">SHOOS Bộ Sưu Tập</span>
+        <p class="mt-4 fs-5 fw-bold">SIÊU SALE X'MAS</p>
+        <p class="mb-4 w-75">
+            Dẫn đầu xu hướng với nét đẹp đa dạng và cá tính sẽ mang lại sự trẻ trung, hiện đại, tinh tế
+            và đẳng cấp cho diện mạo của bạn. Hãy khám phá ngay!
+        </p>
+        <div class="btn border-0 py-3 px-4 mt-5 shadow-sm fw-bold d-flex flex-row text-light w-25 text-center"
+             style="background: #fe612e">
+            Khám Phá
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <img src="~/Images/bg-1.jpg" class="col-5" />
+    <div class="col-7"></div>
+</div>
+
+<div class="m-5">
+    <div class="text-center">
+        <div class="position-absolute bg-warning bg-opacity-75"
+             style="width: 50px; height: 50px; top: 45em; right: 30em;
+                border-radius: 50px; z-index: -1"></div>
+        <span class="fw-bold" style="font-size: 40px">Nổi Bật Nhất</span>
+        <div class="justify-content-around m-auto mt-3" style="width: 90%">
+            <div class="btn btn-danger px-3 py-2 shadow-sm" style="border-radius: 20px; border: none">Tất cả</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Adidas</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Puma</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Jordan</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Converse</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Nike</div>
+            <div class="btn btn-outline-danger px-3 py-2" style="border-radius: 20px; border: none">Reebok</div>
+        </div>
+        <div class="row d-flex flex-row my-4">
+            @foreach (var item in Model)
+            {
+                <div class="card w-25 text-center shadow-sm" style="border: none;">
+                    <div class="card-img my-2">
+                        <img class="img-fluid" src="~/Images/@item.HINH" />
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="fw-bold fs-4">@item.TENSP</blockquote>
+                        <p class="text-truncate">@item.MOTA</p>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between mb-3">
+                        <div>
+                            <b>Màu sắc: </b>
+                            @item.MAUSAC
+                        </div>
+                        <div>
+                            <b>Kích cỡ: </b>
+                            @item.KICHCO
+                        </div>
+                    </div>
+                    <div class="fw-light fs-3 text-end">@item.GIA VND</div>
+                        @Html.ActionLink("Xem thêm", "Product", "Home", new {id=item.MASP}, new {@class= "btn btn-outline-dark my-3 py-3 fw-light" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

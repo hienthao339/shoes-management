@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Nhóm4_SHOOS_Shop.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Thương hiệu
+        </th>
+        <th>
+            Nhà cung cấp
+        </th>
+        <th>
+            Màu sắc
+        </th>
+        <th>
+            Kích cỡ
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Hình
+        </th>
+        <th>
+            Giá
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THUONGHIEU.TENTH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHACUNGCAP.TENNCC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAUSAC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KICHCO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTA)
+        </td>
+        <td>
+            <img src="/Images/@item.HINH" class="img-fluid" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIA)
+        </td>
+
+        <td class="d-flex flex-row justify-content-end">
+            @Html.ActionLink("Edit", "Edit", new { id = item.MASP }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.MASP }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
