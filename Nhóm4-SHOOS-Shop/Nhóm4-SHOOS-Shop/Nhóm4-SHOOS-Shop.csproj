@@ -134,13 +134,10 @@
     <Compile Include="Controllers\GIAOHANGsController.cs" />
     <Compile Include="Controllers\HOADONsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KHACHHANGsController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
     <Compile Include="Controllers\NHACUNGCAPsController.cs" />
     <Compile Include="Controllers\NHANVIENsController.cs" />
     <Compile Include="Controllers\SANPHAMsController.cs" />
-    <Compile Include="Controllers\THANHTOANsController.cs" />
-    <Compile Include="Controllers\THEsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,11 +298,6 @@
     <Content Include="Views\HOADONs\Details.cshtml" />
     <Content Include="Views\HOADONs\Edit.cshtml" />
     <Content Include="Views\HOADONs\Index.cshtml" />
-    <Content Include="Views\KHACHHANGs\Create.cshtml" />
-    <Content Include="Views\KHACHHANGs\Delete.cshtml" />
-    <Content Include="Views\KHACHHANGs\Details.cshtml" />
-    <Content Include="Views\KHACHHANGs\Edit.cshtml" />
-    <Content Include="Views\KHACHHANGs\Index.cshtml" />
     <Content Include="Views\KHUYENMAIs\Create.cshtml" />
     <Content Include="Views\KHUYENMAIs\Delete.cshtml" />
     <Content Include="Views\KHUYENMAIs\Details.cshtml" />
@@ -321,16 +313,6 @@
     <Content Include="Views\NHANVIENs\Details.cshtml" />
     <Content Include="Views\NHANVIENs\Edit.cshtml" />
     <Content Include="Views\NHANVIENs\Index.cshtml" />
-    <Content Include="Views\THANHTOANs\Create.cshtml" />
-    <Content Include="Views\THANHTOANs\Delete.cshtml" />
-    <Content Include="Views\THANHTOANs\Details.cshtml" />
-    <Content Include="Views\THANHTOANs\Edit.cshtml" />
-    <Content Include="Views\THANHTOANs\Index.cshtml" />
-    <Content Include="Views\THEs\Create.cshtml" />
-    <Content Include="Views\THEs\Delete.cshtml" />
-    <Content Include="Views\THEs\Details.cshtml" />
-    <Content Include="Views\THEs\Edit.cshtml" />
-    <Content Include="Views\THEs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

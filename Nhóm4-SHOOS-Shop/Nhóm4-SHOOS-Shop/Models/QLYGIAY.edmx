@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBShoesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBShoesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CHITIETDH">
           <Key>
             <PropertyRef Name="MACTDH" />
@@ -53,6 +53,7 @@
           <Property Name="HOTEN" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="char" MaxLength="10" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="MATHE" Type="int" />
         </EntityType>
         <EntityType Name="KHUYENMAI">
           <Key>
@@ -113,7 +114,6 @@
           </Key>
           <Property Name="MATT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MAHD" Type="int" />
-          <Property Name="MATHE" Type="int" />
           <Property Name="NGAYTHANHTOAN" Type="date" />
           <Property Name="SOTIEN" Type="int" />
           <Property Name="HINHTHUCTHANHTOAN" Type="nvarchar" MaxLength="50" />
@@ -244,12 +244,12 @@
         </Association>
         <Association Name="FK_MATHE_THE">
           <End Role="THE" Type="Self.THE" Multiplicity="0..1" />
-          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="THE">
               <PropertyRef Name="MATHE" />
             </Principal>
-            <Dependent Role="THANHTOAN">
+            <Dependent Role="KHACHHANG">
               <PropertyRef Name="MATHE" />
             </Dependent>
           </ReferentialConstraint>
@@ -318,15 +318,14 @@
           </AssociationSet>
           <AssociationSet Name="FK_MATHE_THE" Association="Self.FK_MATHE_THE">
             <End Role="THE" EntitySet="THE" />
-            <End Role="THANHTOAN" EntitySet="THANHTOAN" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
           </AssociationSet>
           <AssociationSet Name="FK_MATT_THANHTOAN" Association="Self.FK_MATT_THANHTOAN">
             <End Role="THANHTOAN" EntitySet="THANHTOAN" />
             <End Role="GIAOHANG" EntitySet="GIAOHANG" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBShoesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -389,6 +388,8 @@
           <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DATHANGs" Relationship="Self.FK_MAKH_KHACHHANG" FromRole="KHACHHANG" ToRole="DATHANG" />
+          <Property Name="MATHE" Type="Int32" />
+          <NavigationProperty Name="THE" Relationship="DBShoesModel.FK_MATHE_THE1" FromRole="KHACHHANG" ToRole="THE" />
         </EntityType>
         <EntityType Name="KHUYENMAI">
           <Key>
@@ -455,13 +456,11 @@
           </Key>
           <Property Name="MATT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MAHD" Type="Int32" />
-          <Property Name="MATHE" Type="Int32" />
           <Property Name="NGAYTHANHTOAN" Type="DateTime" Precision="0" />
           <Property Name="SOTIEN" Type="Int32" />
           <Property Name="HINHTHUCTHANHTOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GIAOHANGs" Relationship="Self.FK_MATT_THANHTOAN" FromRole="THANHTOAN" ToRole="GIAOHANG" />
           <NavigationProperty Name="HOADON" Relationship="Self.FK_MAHD_HOADON" FromRole="THANHTOAN" ToRole="HOADON" />
-          <NavigationProperty Name="THE" Relationship="Self.FK_MATHE_THE" FromRole="THANHTOAN" ToRole="THE" />
         </EntityType>
         <EntityType Name="THE">
           <Key>
@@ -471,7 +470,7 @@
           <Property Name="SOTHE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
           <Property Name="TENNGANHANG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CHUTAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="THANHTOANs" Relationship="Self.FK_MATHE_THE" FromRole="THE" ToRole="THANHTOAN" />
+          <NavigationProperty Name="KHACHHANGs" Relationship="DBShoesModel.FK_MATHE_THE1" FromRole="THE" ToRole="KHACHHANG" />
         </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
@@ -601,18 +600,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MATHE_THE">
-          <End Role="THE" Type="Self.THE" Multiplicity="0..1" />
-          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="THE">
-              <PropertyRef Name="MATHE" />
-            </Principal>
-            <Dependent Role="THANHTOAN">
-              <PropertyRef Name="MATHE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CHITIETDHs" EntityType="Self.CHITIETDH" />
           <EntitySet Name="DATHANGs" EntityType="Self.DATHANG" />
@@ -667,11 +654,23 @@
             <End Role="THUONGHIEU" EntitySet="THUONGHIEUx" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MATHE_THE" Association="Self.FK_MATHE_THE">
+          <AssociationSet Name="FK_MATHE_THE1" Association="DBShoesModel.FK_MATHE_THE1">
             <End Role="THE" EntitySet="THEs" />
-            <End Role="THANHTOAN" EntitySet="THANHTOANs" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_MATHE_THE1">
+          <End Type="DBShoesModel.THE" Role="THE" Multiplicity="0..1" />
+          <End Type="DBShoesModel.KHACHHANG" Role="KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THE">
+              <PropertyRef Name="MATHE" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="MATHE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -725,6 +724,7 @@
           <EntitySetMapping Name="KHACHHANGs">
             <EntityTypeMapping TypeName="DBShoesModel.KHACHHANG">
               <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="MATHE" ColumnName="MATHE" />
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
@@ -795,7 +795,6 @@
               <MappingFragment StoreEntitySet="THANHTOAN">
                 <ScalarProperty Name="MATT" ColumnName="MATT" />
                 <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-                <ScalarProperty Name="MATHE" ColumnName="MATHE" />
                 <ScalarProperty Name="NGAYTHANHTOAN" ColumnName="NGAYTHANHTOAN" />
                 <ScalarProperty Name="SOTIEN" ColumnName="SOTIEN" />
                 <ScalarProperty Name="HINHTHUCTHANHTOAN" ColumnName="HINHTHUCTHANHTOAN" />

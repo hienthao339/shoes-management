@@ -17,7 +17,7 @@ namespace Nhóm4_SHOOS_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public THE()
         {
-            this.THANHTOANs = new HashSet<THANHTOAN>();
+            this.KHACHHANGs = new HashSet<KHACHHANG>();
         }
     
         public int MATHE { get; set; }
@@ -26,6 +26,6 @@ namespace Nhóm4_SHOOS_Shop.Models
         public string CHUTAIKHOAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THANHTOAN> THANHTOANs { get; set; }
+        public virtual ICollection<KHACHHANG> KHACHHANGs { get; set; }
     }
 }

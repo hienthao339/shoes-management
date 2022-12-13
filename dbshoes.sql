@@ -17,7 +17,9 @@ CREATE TABLE KHACHHANG
 	HOTEN NVARCHAR(50),
 	SDT CHAR(10),
 	DIACHI NVARCHAR(50),
+	MATHE INT CONSTRAINT FK_MATHE_THE FOREIGN KEY REFERENCES THE(MATHE)
 )
+
 CREATE TABLE NHANVIEN
 (
 	MANV INT IDENTITY CONSTRAINT PK_MANV PRIMARY KEY,
@@ -63,7 +65,6 @@ CREATE TABLE THANHTOAN
 (
 	MATT INT IDENTITY CONSTRAINT PK_MATT PRIMARY KEY,
 	MAHD INT CONSTRAINT FK_MAHD_HOADON FOREIGN KEY REFERENCES HOADON(MAHD),
-	MATHE INT CONSTRAINT FK_MATHE_THE FOREIGN KEY REFERENCES THE(MATHE),
 	NGAYTHANHTOAN DATE,
 	SOTIEN INT,
 	HINHTHUCTHANHTOAN NVARCHAR(50)
@@ -107,18 +108,17 @@ CREATE TABLE CHITIETDH
 	SL INT,
 )
 
---------------
-
+----------------------------------------------------------------------
+INSERT INTO THE (SOTHE, TENNGANHANG, CHUTAIKHOAN)
+VALUES ('11111111','Sacombank',N'Trần Văn A'),
+('22222222','TPBank',N'Lê Văn B')
+----------------------------------------------------------------------
 INSERT INTO THUONGHIEU (TENTH)
 VALUES ('Nike'), ('Puma'), ('Jordan'), ('Addidas'), ('Reebok'), ('Converse')
-
 ----------------------------------------------------------------------------------------------------
-
 INSERT INTO NHACUNGCAP(TENNCC)
 VALUES (N'Công ty cổ phần DS'), (N'Trung tâm thương mại Ns-Hefls'), (N'Công ty CTO')
-
 ----------------------------------------------------------------------------------------------------
-
 INSERT INTO SANPHAM (TENSP, MATH, MANCC, MAUSAC, KICHCO, SL, MOTA, HINH, GIA)
 VALUES ('Nike Waffle One SE', 1, 2, N'Đỏ', 40, 5, N'Mang đến một diện mạo mới cho phiên bản Waffle mang tính biểu tượng, thiết kế độc đáo cân bằng
 mọi thứ bạn yêu thích nhất về loạt sản phẩm của Nike với những cải tiến mới mẻ', 'nike-waffle-one-se.jpg', 1200000),
@@ -144,10 +144,21 @@ bóng rổ này chống va đập tối ưu và đế ngoài bằng cao su với
 Chucks chắc chắn sẽ quay đầu. Canvas có thể tinh tế hoặc sắc sảo tùy thích, trong khi đế xếp chồng lên nhau sẽ đưa bạn lên cao hơn.', 'converse-chuck-taylor-all-star-extra.jpg', 2500000),
 ('Converse Chuck 70 Print', 6, 3, N'Đen', 40, 3, N'Cổ điển hàng ngày, đi kèm với bất kỳ trang phục nào đã trở lại để tạo ra một làn sóng mới. Lần này, biểu tượng 
 giữ cho nó sự bóng bẩy với các hoạ tiết đốm lửa rực rỡ bắt mắt.', 'converse-chuck-70-print.jpg', 1300000)
-
 ----------------------------------------------------------------------------------------------------
-
 INSERT INTO KHUYENMAI (TENKM, TRIGIA, NGAYBD, NGAYKT)
 VALUES (N'Bão Sale', 200000,'1/10/2022','11/10/2022'),
 (N'Siêu Sale', 100000,'12/11/2022','18/11/2022'),
 (N'Black Friday', 500000,'20/11/2022','23/11/2022')
+----------------------------------------------------------------------------------------------------
+INSERT INTO NHANVIEN (TENNV, SDT, DIACHI, NGAYVAOLAM, LUONG)
+VALUES(N'Trần Hiền Thảo', '0981777889', N'72 Bình Thạnh', '02/09/2022', 5000000),
+(N'Đoàn Thị Phương Thảo', '0981733456', N'812 An Lạc', '08/02/2022', 6000000),
+(N'Đặng Thế Nghĩa', '0912683342', N'2/182 Tân Phú', '10/03/2022', 7000000)
+----------------------------------------------------------------------------------------------------
+INSERT INTO KHACHHANG (HOTEN, SDT, DIACHI, MATHE)
+VALUES(N'Trần Văn A', '0982673457', N'34 Chợ Bàn Cờ', 1),
+(N'Lê Văn B', '0923765893', N'123 Âu Cơ', 2),
+(N'Trần Văn C', '0953454634', N'3/122 Trung Chánh', NULL)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------

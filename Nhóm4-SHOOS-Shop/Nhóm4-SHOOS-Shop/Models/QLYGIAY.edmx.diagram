@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="96b3ab60ecb8406d93e00db95c6d2284" Name="Diagram1">
+      <Diagram DiagramId="96b3ab60ecb8406d93e00db95c6d2284" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="DBShoesModel.CHITIETDH" Width="1.5" PointX="12" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBShoesModel.DATHANG" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBShoesModel.GIAOHANG" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
@@ -28,7 +28,7 @@
         <AssociationConnector Association="DBShoesModel.FK_MANV_NHANVIEN" ManuallyRouted="false" />
         <AssociationConnector Association="DBShoesModel.FK_MANCC_NHACUNGCAP" ManuallyRouted="false" />
         <AssociationConnector Association="DBShoesModel.FK_MATH_THUONGHIEU" ManuallyRouted="false" />
-        <AssociationConnector Association="DBShoesModel.FK_MATHE_THE" ManuallyRouted="false" />
+        <AssociationConnector Association="DBShoesModel.FK_MATHE_THE1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
