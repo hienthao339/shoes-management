@@ -14,18 +14,12 @@ namespace Nhóm4_SHOOS_Shop.Models
     
     public partial class HOADON
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HOADON()
-        {
-            this.THANHTOANs = new HashSet<THANHTOAN>();
-        }
-    
         public int MAHD { get; set; }
+        public Nullable<int> MADH { get; set; }
         public Nullable<int> MANV { get; set; }
         public Nullable<System.DateTime> NGAYLAPHD { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THANHTOAN> THANHTOANs { get; set; }
+        public virtual DATHANG DATHANG { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
     }
 }

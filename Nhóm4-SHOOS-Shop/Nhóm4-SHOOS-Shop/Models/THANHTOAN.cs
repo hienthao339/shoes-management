@@ -14,20 +14,11 @@ namespace Nhóm4_SHOOS_Shop.Models
     
     public partial class THANHTOAN
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public THANHTOAN()
-        {
-            this.GIAOHANGs = new HashSet<GIAOHANG>();
-        }
-    
         public int MATT { get; set; }
-        public Nullable<int> MAHD { get; set; }
+        public Nullable<int> MADH { get; set; }
         public Nullable<System.DateTime> NGAYTHANHTOAN { get; set; }
         public Nullable<int> SOTIEN { get; set; }
-        public string HINHTHUCTHANHTOAN { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GIAOHANG> GIAOHANGs { get; set; }
-        public virtual HOADON HOADON { get; set; }
+        public virtual DATHANG DATHANG { get; set; }
     }
 }

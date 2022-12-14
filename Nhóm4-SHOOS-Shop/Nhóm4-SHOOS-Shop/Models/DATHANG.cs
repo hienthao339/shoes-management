@@ -18,19 +18,27 @@ namespace Nhóm4_SHOOS_Shop.Models
         public DATHANG()
         {
             this.CHITIETDHs = new HashSet<CHITIETDH>();
+            this.GIAOHANGs = new HashSet<GIAOHANG>();
+            this.HOADONs = new HashSet<HOADON>();
+            this.THANHTOANs = new HashSet<THANHTOAN>();
         }
     
         public int MADH { get; set; }
         public Nullable<int> MAKH { get; set; }
         public Nullable<int> MAKM { get; set; }
-        public Nullable<int> MAGH { get; set; }
         public Nullable<System.DateTime> NGAYDAT { get; set; }
         public string GHICHU { get; set; }
         public Nullable<int> TONGTIEN { get; set; }
+        public string HINHTHUCTHANHTOAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
-        public virtual GIAOHANG GIAOHANG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GIAOHANG> GIAOHANGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HOADON> HOADONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THANHTOAN> THANHTOANs { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }
         public virtual KHUYENMAI KHUYENMAI { get; set; }
     }
