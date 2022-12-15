@@ -3,21 +3,33 @@ use DBShoes
 
 SET DATEFORMAT DMY
 
-CREATE TABLE THE
+--------------------------------------------------------------------------------
+select * from LOAIKH for json auto
+select * from KHACHHANG for json auto
+select * from NHANVIEN for json auto
+select * from THE for json auto
+select * from THUONGHIEU for json auto
+select * from NHACUNGCAP for json auto
+select * from SANPHAM for json auto
+select * from KHUYENMAI for json auto
+select * from DATHANG for json auto
+select * from HOADON for json auto
+select * from THANHTOAN for json auto
+select * from GIAOHANG for json auto
+select * from CHITIETDH for json auto
+--------------------------------------------------------------------------------
+CREATE TABLE LOAIKH
 (
-	MATHE INT IDENTITY CONSTRAINT PK_MATHE PRIMARY KEY,
-	SOTHE CHAR(12),
-	TENNGANHANG VARCHAR(50),
-	CHUTAIKHOAN NVARCHAR(50)
+	MALKH INT IDENTITY CONSTRAINT PK_MALKH PRIMARY KEY,
+	TENLKH NVARCHAR(50)
 )
-
 CREATE TABLE KHACHHANG
 (
 	MAKH INT IDENTITY CONSTRAINT PK_MAKH PRIMARY KEY,
 	HOTEN NVARCHAR(50),
 	SDT CHAR(10),
 	DIACHI NVARCHAR(50),
-	MATHE INT CONSTRAINT FK_MATHE_THE FOREIGN KEY REFERENCES THE(MATHE)
+	MALKH INT CONSTRAINT FK_MALKH_LOAIKH FOREIGN KEY REFERENCES LOAIKH(MALKH)
 )
 
 CREATE TABLE NHANVIEN
@@ -29,10 +41,11 @@ CREATE TABLE NHANVIEN
 	NGAYVAOLAM DATE,
 	LUONG INT
 )
+
 CREATE TABLE THUONGHIEU
 (
 	MATH INT IDENTITY CONSTRAINT PK_MATH PRIMARY KEY,
-	TENTH VARCHAR (20),
+	TENTH VARCHAR (20)
 )
 
 CREATE TABLE NHACUNGCAP
@@ -64,21 +77,14 @@ CREATE TABLE KHUYENMAI
 	NGAYKT DATE
 )
 
-CREATE TABLE DATHANG
+CREATE TABLE THE
 (
-	MADH INT IDENTITY CONSTRAINT PK_MADH PRIMARY KEY,
-	MAKH INT CONSTRAINT FK_MAKH_KHACHHANG FOREIGN KEY REFERENCES KHACHHANG(MAKH),
-	MAKM INT CONSTRAINT FK_MAKM_KHUYENMAI FOREIGN KEY REFERENCES KHUYENMAI(MAKM),
-	NGAYDAT DATE,
-	GHICHU NVARCHAR(50),
-	TONGTIEN INT,
-	HINHTHUCTHANHTOAN NVARCHAR(50)
+	MATHE INT CONSTRAINT PK_MATHE PRIMARY KEY,
+	SOTHE CHAR(12) 
 )
-
 
 CREATE TABLE HOADON(
 	MAHD INT IDENTITY CONSTRAINT PK_MAHD PRIMARY KEY,
-	MADH INT CONSTRAINT FK_MADH_DATHANG_HD FOREIGN KEY REFERENCES DATHANG(MADH),
 	MANV INT CONSTRAINT FK_MANV_NHANVIEN FOREIGN KEY REFERENCES NHANVIEN(MANV),
 	NGAYLAPHD DATE
 )
@@ -86,34 +92,42 @@ CREATE TABLE HOADON(
 CREATE TABLE THANHTOAN
 (
 	MATT INT IDENTITY CONSTRAINT PK_MATT PRIMARY KEY,
-	MADH INT CONSTRAINT FK_MADH_DATHANG_TT FOREIGN KEY REFERENCES DATHANG(MADH),
+	MAHD INT CONSTRAINT FK_MAHD_HOADON FOREIGN KEY REFERENCES HOADON(MAHD),
 	NGAYTHANHTOAN DATE,
-	SOTIEN INT
+	MATHE INT CONSTRAINT FK_SOTHE FOREIGN KEY REFERENCES THE(MATHE)
 )
+
 
 CREATE TABLE GIAOHANG
 (
 	MAGH INT IDENTITY CONSTRAINT PK_MAGH PRIMARY KEY,
-	MADH INT CONSTRAINT FK_MADH_DATHANG_GH FOREIGN KEY REFERENCES DATHANG(MADH),
-	TENTAIXE NVARCHAR(50),
+	MATT INT CONSTRAINT FK_MATT FOREIGN KEY REFERENCES THANHTOAN(MATT),
+	TENTX NVARCHAR(50),
 	NGAYGIAO DATE,
-	DAGIAO BIT,
-	DATHANHTOAN BIT
+	NGAYHOANTHANH DATE
+)
+
+CREATE TABLE DATHANG
+(
+	MADH INT IDENTITY CONSTRAINT PK_MADH PRIMARY KEY,
+	MAKH INT CONSTRAINT FK_MAKH_KHACHHANG FOREIGN KEY REFERENCES KHACHHANG(MAKH),
+	MAKM INT CONSTRAINT FK_MAKM_KHUYENMAI FOREIGN KEY REFERENCES KHUYENMAI(MAKM),
+	NGAYDAT DATE,
+	GHICHU NVARCHAR(50),
+	MAGH INT CONSTRAINT FK_MAGH_GIAOHANG FOREIGN KEY REFERENCES GIAOHANG(MAGH)
 )
 
 CREATE TABLE CHITIETDH
 (
 	MACTDH INT IDENTITY CONSTRAINT PK_MACTDH PRIMARY KEY,
-	MADH INT CONSTRAINT FK_MADH_DATHANG_CTDH FOREIGN KEY REFERENCES DATHANG(MADH),
+	MADH INT CONSTRAINT FK_MADH_DATHANG FOREIGN KEY REFERENCES DATHANG(MADH),
 	MASP INT CONSTRAINT FK_MASP_SANPHAM_DH FOREIGN KEY REFERENCES SANPHAM(MASP),
 	SL INT,
-)
+)	
+---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
 
-----------------------------------------------------------------------
-INSERT INTO THE (SOTHE, TENNGANHANG, CHUTAIKHOAN)
-VALUES ('11111111','Sacombank',N'Trần Văn A'),
-('22222222','TPBank',N'Lê Văn B')
-----------------------------------------------------------------------
 INSERT INTO THUONGHIEU (TENTH)
 VALUES ('Nike'), ('Puma'), ('Jordan'), ('Addidas'), ('Reebok'), ('Converse')
 ----------------------------------------------------------------------------------------------------
@@ -151,26 +165,15 @@ VALUES (N'Bão Sale', 200000,'1/10/2022','10/12/2022'),
 (N'Siêu Sale', 100000,'12/11/2022','11/12/2022'),
 (N'Black Friday', 500000,'20/11/2022','20/11/2022')
 ----------------------------------------------------------------------------------------------------
+INSERT INTO LOAIKH (TENLKH)
+VALUES (N'Bình dân'), (N'Trung cấp'), (N'Cao cấp')
+----------------------------------------------------------------------------------------------------
 INSERT INTO NHANVIEN (TENNV, SDT, DIACHI, NGAYVAOLAM, LUONG)
 VALUES(N'Trần Hiền Thảo', '0981777889', N'72 Bình Thạnh', '02/09/2022', 5000000),
 (N'Đoàn Thị Phương Thảo', '0981733456', N'812 An Lạc', '08/02/2022', 6000000),
 (N'Đặng Thế Nghĩa', '0912683342', N'2/182 Tân Phú', '10/03/2022', 7000000)
 ----------------------------------------------------------------------------------------------------
-INSERT INTO KHACHHANG (HOTEN, SDT, DIACHI, MATHE)
+INSERT INTO KHACHHANG (HOTEN, SDT, DIACHI, MALKH)
 VALUES(N'Trần Văn A', '0982673457', N'34 Chợ Bàn Cờ', 1),
 (N'Lê Văn B', '0923765893', N'123 Âu Cơ', 2),
-(N'Trần Văn C', '0953454634', N'3/122 Trung Chánh', NULL)
-----------------------------------------------------------------------------------------------------
-INSERT INTO DATHANG (MAKH, MAKM, NGAYDAT, GHICHU, HINHTHUCTHANHTOAN)
-VALUES(1,1,'10/12/2022', N'Lần 1 mua hàng nè', N'Chuyển khoản')
-----------------------------------------------------------------------------------------------------
-INSERT INTO CHITIETDH (MADH, MASP, SL)
-VALUES(1,3,1),
-(1,1,1),
-(1,2,1)
----------------------------------------------------------------------------------------------------
-INSERT INTO GIAOHANG (MADH, TENTAIXE, NGAYGIAO)
-VALUES(1, N'La Văn Nghị', '11/12/2022')
----------------------------------------------------------------------------------------------------
-INSERT INTO THANHTOAN (MADH, NGAYTHANHTOAN)
-VALUES (1, GETDATE())
+(N'Trần Văn C', '0953454634', N'3/122 Trung Chánh', 3)

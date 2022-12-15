@@ -18,12 +18,13 @@
         </div>
         <div>
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <div class="nav-link d-flex flex-row align-items-center">
-                        <a href="@Url.Action("Index", "SANPHAMs")" class="text-light" style="margin-right: 1em">
-                            <i class="fa-solid fa-user"></i>
-                        </a>
-                    </div>
+                <li class="nav-link d-flex flex-row align-items-center">
+                    <a href="@Url.Action("Index", "SANPHAMs")" class="text-light nav-item" style="margin-right: 1em">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <a href="@Url.Action("Cart", "Home")" class="text-light nav-item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
                 </li>
             </ul>
         </div>
