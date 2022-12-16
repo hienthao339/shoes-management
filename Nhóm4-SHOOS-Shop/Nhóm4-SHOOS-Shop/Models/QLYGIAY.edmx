@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBShoesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBShoesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CHITIETDH">
           <Key>
             <PropertyRef Name="MACTDH" />
@@ -21,28 +21,26 @@
           <Property Name="MADH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MAKH" Type="int" />
           <Property Name="MAKM" Type="int" />
+          <Property Name="MAGH" Type="int" />
+          <Property Name="SOTHE" Type="char" MaxLength="12" />
           <Property Name="NGAYDAT" Type="date" />
           <Property Name="GHICHU" Type="nvarchar" MaxLength="50" />
-          <Property Name="TONGTIEN" Type="int" />
-          <Property Name="HINHTHUCTHANHTOAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATHANHTOAN" Type="bit" />
         </EntityType>
         <EntityType Name="GIAOHANG">
           <Key>
             <PropertyRef Name="MAGH" />
           </Key>
           <Property Name="MAGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MADH" Type="int" />
-          <Property Name="TENTAIXE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TENTX" Type="nvarchar" MaxLength="50" />
           <Property Name="NGAYGIAO" Type="date" />
-          <Property Name="DAGIAO" Type="bit" />
-          <Property Name="DATHANHTOAN" Type="bit" />
+          <Property Name="NGAYHOANTHANH" Type="date" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
             <PropertyRef Name="MAHD" />
           </Key>
           <Property Name="MAHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MADH" Type="int" />
           <Property Name="MANV" Type="int" />
           <Property Name="NGAYLAPHD" Type="date" />
         </EntityType>
@@ -54,7 +52,7 @@
           <Property Name="HOTEN" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="char" MaxLength="10" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
-          <Property Name="MATHE" Type="int" />
+          <Property Name="MALKH" Type="int" />
         </EntityType>
         <EntityType Name="KHUYENMAI">
           <Key>
@@ -65,6 +63,13 @@
           <Property Name="TRIGIA" Type="int" />
           <Property Name="NGAYBD" Type="date" />
           <Property Name="NGAYKT" Type="date" />
+        </EntityType>
+        <EntityType Name="LOAIKH">
+          <Key>
+            <PropertyRef Name="MALKH" />
+          </Key>
+          <Property Name="MALKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENLKH" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
           <Key>
@@ -109,24 +114,6 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="THANHTOAN">
-          <Key>
-            <PropertyRef Name="MATT" />
-          </Key>
-          <Property Name="MATT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MADH" Type="int" />
-          <Property Name="NGAYTHANHTOAN" Type="date" />
-          <Property Name="SOTIEN" Type="int" />
-        </EntityType>
-        <EntityType Name="THE">
-          <Key>
-            <PropertyRef Name="MATHE" />
-          </Key>
-          <Property Name="MATHE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SOTHE" Type="char" MaxLength="12" />
-          <Property Name="TENNGANHANG" Type="varchar" MaxLength="50" />
-          <Property Name="CHUTAIKHOAN" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
             <PropertyRef Name="MATH" />
@@ -134,7 +121,7 @@
           <Property Name="MATH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TENTH" Type="varchar" MaxLength="20" />
         </EntityType>
-        <Association Name="FK_MADH_DATHANG_CTDH">
+        <Association Name="FK_MADH_DATHANG">
           <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
           <End Role="CHITIETDH" Type="Self.CHITIETDH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -146,39 +133,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MADH_DATHANG_GH">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="GIAOHANG" Type="Self.GIAOHANG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DATHANG">
-              <PropertyRef Name="MADH" />
-            </Principal>
-            <Dependent Role="GIAOHANG">
-              <PropertyRef Name="MADH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MADH_DATHANG_HD">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="DATHANG">
               <PropertyRef Name="MADH" />
             </Principal>
             <Dependent Role="HOADON">
-              <PropertyRef Name="MADH" />
+              <PropertyRef Name="MAHD" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MADH_DATHANG_TT">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+        <Association Name="FK_MAGH_GIAOHANG">
+          <End Role="GIAOHANG" Type="Self.GIAOHANG" Multiplicity="0..1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DATHANG">
-              <PropertyRef Name="MADH" />
+            <Principal Role="GIAOHANG">
+              <PropertyRef Name="MAGH" />
             </Principal>
-            <Dependent Role="THANHTOAN">
-              <PropertyRef Name="MADH" />
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="MAGH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -203,6 +178,18 @@
             </Principal>
             <Dependent Role="DATHANG">
               <PropertyRef Name="MAKM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MALKH_LOAIKH">
+          <End Role="LOAIKH" Type="Self.LOAIKH" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIKH">
+              <PropertyRef Name="MALKH" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="MALKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -254,18 +241,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MATHE_THE">
-          <End Role="THE" Type="Self.THE" Multiplicity="0..1" />
-          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="THE">
-              <PropertyRef Name="MATHE" />
-            </Principal>
-            <Dependent Role="KHACHHANG">
-              <PropertyRef Name="MATHE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DBShoesModelStoreContainer">
           <EntitySet Name="CHITIETDH" EntityType="Self.CHITIETDH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATHANG" EntityType="Self.DATHANG" Schema="dbo" store:Type="Tables" />
@@ -273,28 +248,23 @@
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHUYENMAI" EntityType="Self.KHUYENMAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIKH" EntityType="Self.LOAIKH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHACUNGCAP" EntityType="Self.NHACUNGCAP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THANHTOAN" EntityType="Self.THANHTOAN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THE" EntityType="Self.THE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THUONGHIEU" EntityType="Self.THUONGHIEU" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_MADH_DATHANG_CTDH" Association="Self.FK_MADH_DATHANG_CTDH">
+          <AssociationSet Name="FK_MADH_DATHANG" Association="Self.FK_MADH_DATHANG">
             <End Role="DATHANG" EntitySet="DATHANG" />
             <End Role="CHITIETDH" EntitySet="CHITIETDH" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MADH_DATHANG_GH" Association="Self.FK_MADH_DATHANG_GH">
-            <End Role="DATHANG" EntitySet="DATHANG" />
-            <End Role="GIAOHANG" EntitySet="GIAOHANG" />
           </AssociationSet>
           <AssociationSet Name="FK_MADH_DATHANG_HD" Association="Self.FK_MADH_DATHANG_HD">
             <End Role="DATHANG" EntitySet="DATHANG" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
-          <AssociationSet Name="FK_MADH_DATHANG_TT" Association="Self.FK_MADH_DATHANG_TT">
+          <AssociationSet Name="FK_MAGH_GIAOHANG" Association="Self.FK_MAGH_GIAOHANG">
+            <End Role="GIAOHANG" EntitySet="GIAOHANG" />
             <End Role="DATHANG" EntitySet="DATHANG" />
-            <End Role="THANHTOAN" EntitySet="THANHTOAN" />
           </AssociationSet>
           <AssociationSet Name="FK_MAKH_KHACHHANG" Association="Self.FK_MAKH_KHACHHANG">
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
@@ -303,6 +273,10 @@
           <AssociationSet Name="FK_MAKM_KHUYENMAI" Association="Self.FK_MAKM_KHUYENMAI">
             <End Role="KHUYENMAI" EntitySet="KHUYENMAI" />
             <End Role="DATHANG" EntitySet="DATHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MALKH_LOAIKH" Association="Self.FK_MALKH_LOAIKH">
+            <End Role="LOAIKH" EntitySet="LOAIKH" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
           </AssociationSet>
           <AssociationSet Name="FK_MANCC_NHACUNGCAP" Association="Self.FK_MANCC_NHACUNGCAP">
             <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />
@@ -320,12 +294,9 @@
             <End Role="THUONGHIEU" EntitySet="THUONGHIEU" />
             <End Role="SANPHAM" EntitySet="SANPHAM" />
           </AssociationSet>
-          <AssociationSet Name="FK_MATHE_THE" Association="Self.FK_MATHE_THE">
-            <End Role="THE" EntitySet="THE" />
-            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBShoesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -337,7 +308,7 @@
           <Property Name="MADH" Type="Int32" />
           <Property Name="MASP" Type="Int32" />
           <Property Name="SL" Type="Int32" />
-          <NavigationProperty Name="DATHANG" Relationship="Self.FK_MADH_DATHANG_CTDH" FromRole="CHITIETDH" ToRole="DATHANG" />
+          <NavigationProperty Name="DATHANG" Relationship="Self.FK_MADH_DATHANG" FromRole="CHITIETDH" ToRole="DATHANG" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.FK_MASP_SANPHAM_DH" FromRole="CHITIETDH" ToRole="SANPHAM" />
         </EntityType>
         <EntityType Name="DATHANG">
@@ -347,14 +318,14 @@
           <Property Name="MADH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MAKH" Type="Int32" />
           <Property Name="MAKM" Type="Int32" />
+          <Property Name="MAGH" Type="Int32" />
+          <Property Name="SOTHE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
           <Property Name="NGAYDAT" Type="DateTime" Precision="0" />
           <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TONGTIEN" Type="Int32" />
-          <Property Name="HINHTHUCTHANHTOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CHITIETDHs" Relationship="Self.FK_MADH_DATHANG_CTDH" FromRole="DATHANG" ToRole="CHITIETDH" />
-          <NavigationProperty Name="GIAOHANGs" Relationship="Self.FK_MADH_DATHANG_GH" FromRole="DATHANG" ToRole="GIAOHANG" />
-          <NavigationProperty Name="HOADONs" Relationship="Self.FK_MADH_DATHANG_HD" FromRole="DATHANG" ToRole="HOADON" />
-          <NavigationProperty Name="THANHTOANs" Relationship="Self.FK_MADH_DATHANG_TT" FromRole="DATHANG" ToRole="THANHTOAN" />
+          <Property Name="DATHANHTOAN" Type="Boolean" />
+          <NavigationProperty Name="CHITIETDHs" Relationship="Self.FK_MADH_DATHANG" FromRole="DATHANG" ToRole="CHITIETDH" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK_MADH_DATHANG_HD" FromRole="DATHANG" ToRole="HOADON" />
+          <NavigationProperty Name="GIAOHANG" Relationship="Self.FK_MAGH_GIAOHANG" FromRole="DATHANG" ToRole="GIAOHANG" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_MAKH_KHACHHANG" FromRole="DATHANG" ToRole="KHACHHANG" />
           <NavigationProperty Name="KHUYENMAI" Relationship="Self.FK_MAKM_KHUYENMAI" FromRole="DATHANG" ToRole="KHUYENMAI" />
         </EntityType>
@@ -363,19 +334,16 @@
             <PropertyRef Name="MAGH" />
           </Key>
           <Property Name="MAGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MADH" Type="Int32" />
-          <Property Name="TENTAIXE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TENTX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NGAYGIAO" Type="DateTime" Precision="0" />
-          <Property Name="DAGIAO" Type="Boolean" />
-          <Property Name="DATHANHTOAN" Type="Boolean" />
-          <NavigationProperty Name="DATHANG" Relationship="Self.FK_MADH_DATHANG_GH" FromRole="GIAOHANG" ToRole="DATHANG" />
+          <Property Name="NGAYHOANTHANH" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DATHANGs" Relationship="Self.FK_MAGH_GIAOHANG" FromRole="GIAOHANG" ToRole="DATHANG" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
             <PropertyRef Name="MAHD" />
           </Key>
           <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MADH" Type="Int32" />
           <Property Name="MANV" Type="Int32" />
           <Property Name="NGAYLAPHD" Type="DateTime" Precision="0" />
           <NavigationProperty Name="DATHANG" Relationship="Self.FK_MADH_DATHANG_HD" FromRole="HOADON" ToRole="DATHANG" />
@@ -389,9 +357,9 @@
           <Property Name="HOTEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MATHE" Type="Int32" />
+          <Property Name="MALKH" Type="Int32" />
           <NavigationProperty Name="DATHANGs" Relationship="Self.FK_MAKH_KHACHHANG" FromRole="KHACHHANG" ToRole="DATHANG" />
-          <NavigationProperty Name="THE" Relationship="Self.FK_MATHE_THE" FromRole="KHACHHANG" ToRole="THE" />
+          <NavigationProperty Name="LOAIKH" Relationship="Self.FK_MALKH_LOAIKH" FromRole="KHACHHANG" ToRole="LOAIKH" />
         </EntityType>
         <EntityType Name="KHUYENMAI">
           <Key>
@@ -403,6 +371,14 @@
           <Property Name="NGAYBD" Type="DateTime" Precision="0" />
           <Property Name="NGAYKT" Type="DateTime" Precision="0" />
           <NavigationProperty Name="DATHANGs" Relationship="Self.FK_MAKM_KHUYENMAI" FromRole="KHUYENMAI" ToRole="DATHANG" />
+        </EntityType>
+        <EntityType Name="LOAIKH">
+          <Key>
+            <PropertyRef Name="MALKH" />
+          </Key>
+          <Property Name="MALKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENLKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KHACHHANGs" Relationship="Self.FK_MALKH_LOAIKH" FromRole="LOAIKH" ToRole="KHACHHANG" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
           <Key>
@@ -452,26 +428,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="THANHTOAN">
-          <Key>
-            <PropertyRef Name="MATT" />
-          </Key>
-          <Property Name="MATT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MADH" Type="Int32" />
-          <Property Name="NGAYTHANHTOAN" Type="DateTime" Precision="0" />
-          <Property Name="SOTIEN" Type="Int32" />
-          <NavigationProperty Name="DATHANG" Relationship="Self.FK_MADH_DATHANG_TT" FromRole="THANHTOAN" ToRole="DATHANG" />
-        </EntityType>
-        <EntityType Name="THE">
-          <Key>
-            <PropertyRef Name="MATHE" />
-          </Key>
-          <Property Name="MATHE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SOTHE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="TENNGANHANG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CHUTAIKHOAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KHACHHANGs" Relationship="Self.FK_MATHE_THE" FromRole="THE" ToRole="KHACHHANG" />
-        </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
             <PropertyRef Name="MATH" />
@@ -480,7 +436,7 @@
           <Property Name="TENTH" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SANPHAMs" Relationship="Self.FK_MATH_THUONGHIEU" FromRole="THUONGHIEU" ToRole="SANPHAM" />
         </EntityType>
-        <Association Name="FK_MADH_DATHANG_CTDH">
+        <Association Name="FK_MADH_DATHANG">
           <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
           <End Role="CHITIETDH" Type="Self.CHITIETDH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -504,39 +460,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MADH_DATHANG_GH">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="GIAOHANG" Type="Self.GIAOHANG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DATHANG">
-              <PropertyRef Name="MADH" />
-            </Principal>
-            <Dependent Role="GIAOHANG">
-              <PropertyRef Name="MADH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MADH_DATHANG_HD">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="DATHANG">
               <PropertyRef Name="MADH" />
             </Principal>
             <Dependent Role="HOADON">
-              <PropertyRef Name="MADH" />
+              <PropertyRef Name="MAHD" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MADH_DATHANG_TT">
-          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="0..1" />
-          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+        <Association Name="FK_MAGH_GIAOHANG">
+          <End Role="GIAOHANG" Type="Self.GIAOHANG" Multiplicity="0..1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DATHANG">
-              <PropertyRef Name="MADH" />
+            <Principal Role="GIAOHANG">
+              <PropertyRef Name="MAGH" />
             </Principal>
-            <Dependent Role="THANHTOAN">
-              <PropertyRef Name="MADH" />
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="MAGH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -576,15 +520,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MATHE_THE">
-          <End Role="THE" Type="Self.THE" Multiplicity="0..1" />
+        <Association Name="FK_MALKH_LOAIKH">
+          <End Role="LOAIKH" Type="Self.LOAIKH" Multiplicity="0..1" />
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="THE">
-              <PropertyRef Name="MATHE" />
+            <Principal Role="LOAIKH">
+              <PropertyRef Name="MALKH" />
             </Principal>
             <Dependent Role="KHACHHANG">
-              <PropertyRef Name="MATHE" />
+              <PropertyRef Name="MALKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -619,14 +563,13 @@
           <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
           <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
           <EntitySet Name="KHUYENMAIs" EntityType="Self.KHUYENMAI" />
+          <EntitySet Name="LOAIKHs" EntityType="Self.LOAIKH" />
           <EntitySet Name="NHACUNGCAPs" EntityType="Self.NHACUNGCAP" />
           <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
           <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="THANHTOANs" EntityType="Self.THANHTOAN" />
-          <EntitySet Name="THEs" EntityType="Self.THE" />
           <EntitySet Name="THUONGHIEUx" EntityType="Self.THUONGHIEU" />
-          <AssociationSet Name="FK_MADH_DATHANG_CTDH" Association="Self.FK_MADH_DATHANG_CTDH">
+          <AssociationSet Name="FK_MADH_DATHANG" Association="Self.FK_MADH_DATHANG">
             <End Role="DATHANG" EntitySet="DATHANGs" />
             <End Role="CHITIETDH" EntitySet="CHITIETDHs" />
           </AssociationSet>
@@ -634,17 +577,13 @@
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
             <End Role="CHITIETDH" EntitySet="CHITIETDHs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MADH_DATHANG_GH" Association="Self.FK_MADH_DATHANG_GH">
-            <End Role="DATHANG" EntitySet="DATHANGs" />
-            <End Role="GIAOHANG" EntitySet="GIAOHANGs" />
-          </AssociationSet>
           <AssociationSet Name="FK_MADH_DATHANG_HD" Association="Self.FK_MADH_DATHANG_HD">
             <End Role="DATHANG" EntitySet="DATHANGs" />
             <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MADH_DATHANG_TT" Association="Self.FK_MADH_DATHANG_TT">
+          <AssociationSet Name="FK_MAGH_GIAOHANG" Association="Self.FK_MAGH_GIAOHANG">
+            <End Role="GIAOHANG" EntitySet="GIAOHANGs" />
             <End Role="DATHANG" EntitySet="DATHANGs" />
-            <End Role="THANHTOAN" EntitySet="THANHTOANs" />
           </AssociationSet>
           <AssociationSet Name="FK_MAKH_KHACHHANG" Association="Self.FK_MAKH_KHACHHANG">
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
@@ -658,8 +597,8 @@
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="HOADON" EntitySet="HOADONs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MATHE_THE" Association="Self.FK_MATHE_THE">
-            <End Role="THE" EntitySet="THEs" />
+          <AssociationSet Name="FK_MALKH_LOAIKH" Association="Self.FK_MALKH_LOAIKH">
+            <End Role="LOAIKH" EntitySet="LOAIKHs" />
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
           </AssociationSet>
           <AssociationSet Name="FK_MANCC_NHACUNGCAP" Association="Self.FK_MANCC_NHACUNGCAP">
@@ -693,10 +632,11 @@
                 <ScalarProperty Name="MADH" ColumnName="MADH" />
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="MAKM" ColumnName="MAKM" />
+                <ScalarProperty Name="MAGH" ColumnName="MAGH" />
+                <ScalarProperty Name="SOTHE" ColumnName="SOTHE" />
                 <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
-                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
-                <ScalarProperty Name="HINHTHUCTHANHTOAN" ColumnName="HINHTHUCTHANHTOAN" />
+                <ScalarProperty Name="DATHANHTOAN" ColumnName="DATHANHTOAN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -704,11 +644,9 @@
             <EntityTypeMapping TypeName="DBShoesModel.GIAOHANG">
               <MappingFragment StoreEntitySet="GIAOHANG">
                 <ScalarProperty Name="MAGH" ColumnName="MAGH" />
-                <ScalarProperty Name="MADH" ColumnName="MADH" />
-                <ScalarProperty Name="TENTAIXE" ColumnName="TENTAIXE" />
+                <ScalarProperty Name="TENTX" ColumnName="TENTX" />
                 <ScalarProperty Name="NGAYGIAO" ColumnName="NGAYGIAO" />
-                <ScalarProperty Name="DAGIAO" ColumnName="DAGIAO" />
-                <ScalarProperty Name="DATHANHTOAN" ColumnName="DATHANHTOAN" />
+                <ScalarProperty Name="NGAYHOANTHANH" ColumnName="NGAYHOANTHANH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -716,7 +654,6 @@
             <EntityTypeMapping TypeName="DBShoesModel.HOADON">
               <MappingFragment StoreEntitySet="HOADON">
                 <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-                <ScalarProperty Name="MADH" ColumnName="MADH" />
                 <ScalarProperty Name="MANV" ColumnName="MANV" />
                 <ScalarProperty Name="NGAYLAPHD" ColumnName="NGAYLAPHD" />
               </MappingFragment>
@@ -729,7 +666,7 @@
                 <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
-                <ScalarProperty Name="MATHE" ColumnName="MATHE" />
+                <ScalarProperty Name="MALKH" ColumnName="MALKH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -741,6 +678,14 @@
                 <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
                 <ScalarProperty Name="NGAYBD" ColumnName="NGAYBD" />
                 <ScalarProperty Name="NGAYKT" ColumnName="NGAYKT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIKHs">
+            <EntityTypeMapping TypeName="DBShoesModel.LOAIKH">
+              <MappingFragment StoreEntitySet="LOAIKH">
+                <ScalarProperty Name="MALKH" ColumnName="MALKH" />
+                <ScalarProperty Name="TENLKH" ColumnName="TENLKH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -788,26 +733,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THANHTOANs">
-            <EntityTypeMapping TypeName="DBShoesModel.THANHTOAN">
-              <MappingFragment StoreEntitySet="THANHTOAN">
-                <ScalarProperty Name="MATT" ColumnName="MATT" />
-                <ScalarProperty Name="MADH" ColumnName="MADH" />
-                <ScalarProperty Name="NGAYTHANHTOAN" ColumnName="NGAYTHANHTOAN" />
-                <ScalarProperty Name="SOTIEN" ColumnName="SOTIEN" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THEs">
-            <EntityTypeMapping TypeName="DBShoesModel.THE">
-              <MappingFragment StoreEntitySet="THE">
-                <ScalarProperty Name="MATHE" ColumnName="MATHE" />
-                <ScalarProperty Name="SOTHE" ColumnName="SOTHE" />
-                <ScalarProperty Name="TENNGANHANG" ColumnName="TENNGANHANG" />
-                <ScalarProperty Name="CHUTAIKHOAN" ColumnName="CHUTAIKHOAN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

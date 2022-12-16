@@ -14,13 +14,18 @@ namespace Nhóm4_SHOOS_Shop.Models
     
     public partial class GIAOHANG
     {
-        public int MAGH { get; set; }
-        public Nullable<int> MADH { get; set; }
-        public string TENTAIXE { get; set; }
-        public Nullable<System.DateTime> NGAYGIAO { get; set; }
-        public Nullable<bool> DAGIAO { get; set; }
-        public Nullable<bool> DATHANHTOAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GIAOHANG()
+        {
+            this.DATHANGs = new HashSet<DATHANG>();
+        }
     
-        public virtual DATHANG DATHANG { get; set; }
+        public int MAGH { get; set; }
+        public string TENTX { get; set; }
+        public Nullable<System.DateTime> NGAYGIAO { get; set; }
+        public Nullable<System.DateTime> NGAYHOANTHANH { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DATHANG> DATHANGs { get; set; }
     }
 }

@@ -31,12 +31,11 @@ namespace Nhóm4_SHOOS_Shop.Models
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
         public virtual DbSet<KHUYENMAI> KHUYENMAIs { get; set; }
+        public virtual DbSet<LOAIKH> LOAIKHs { get; set; }
         public virtual DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<THANHTOAN> THANHTOANs { get; set; }
-        public virtual DbSet<THE> THEs { get; set; }
         public virtual DbSet<THUONGHIEU> THUONGHIEUx { get; set; }
     }
 }

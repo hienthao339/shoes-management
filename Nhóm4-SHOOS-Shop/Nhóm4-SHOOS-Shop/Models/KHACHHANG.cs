@@ -24,10 +24,10 @@ namespace Nhóm4_SHOOS_Shop.Models
         public string HOTEN { get; set; }
         public string SDT { get; set; }
         public string DIACHI { get; set; }
-        public Nullable<int> MATHE { get; set; }
+        public Nullable<int> MALKH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATHANG> DATHANGs { get; set; }
-        public virtual THE THE { get; set; }
+        public virtual LOAIKH LOAIKH { get; set; }
     }
 }

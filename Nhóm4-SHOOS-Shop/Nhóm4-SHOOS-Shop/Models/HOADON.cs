@@ -15,7 +15,6 @@ namespace Nhóm4_SHOOS_Shop.Models
     public partial class HOADON
     {
         public int MAHD { get; set; }
-        public Nullable<int> MADH { get; set; }
         public Nullable<int> MANV { get; set; }
         public Nullable<System.DateTime> NGAYLAPHD { get; set; }
     
