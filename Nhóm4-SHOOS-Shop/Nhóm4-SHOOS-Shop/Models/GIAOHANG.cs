@@ -21,11 +21,12 @@ namespace Nhóm4_SHOOS_Shop.Models
         }
     
         public int MAGH { get; set; }
-        public string TENTX { get; set; }
+        public Nullable<int> MATX { get; set; }
         public Nullable<System.DateTime> NGAYGIAO { get; set; }
         public Nullable<System.DateTime> NGAYHOANTHANH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATHANG> DATHANGs { get; set; }
+        public virtual TAIXE TAIXE { get; set; }
     }
 }
