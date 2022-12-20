@@ -19,6 +19,7 @@ namespace Nhóm4_SHOOS_Shop.Models
         public Nullable<int> MASP { get; set; }
         public Nullable<int> SL { get; set; }
     
+        public virtual DANHGIA DANHGIA { get; set; }
         public virtual DATHANG DATHANG { get; set; }
         public virtual SANPHAM SANPHAM { get; set; }
     }

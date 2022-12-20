@@ -17,6 +17,7 @@ namespace Nhóm4_SHOOS_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHANVIEN()
         {
+            this.CHITIETCTs = new HashSet<CHITIETCT>();
             this.HOADONs = new HashSet<HOADON>();
         }
     
@@ -27,6 +28,8 @@ namespace Nhóm4_SHOOS_Shop.Models
         public Nullable<System.DateTime> NGAYVAOLAM { get; set; }
         public Nullable<int> LUONG { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETCT> CHITIETCTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
     }

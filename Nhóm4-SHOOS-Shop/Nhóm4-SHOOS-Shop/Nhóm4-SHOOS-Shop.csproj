@@ -134,7 +134,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CATRUC.cs">
+      <DependentUpon>QLYGIAY.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CHITIETCT.cs">
+      <DependentUpon>QLYGIAY.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CHITIETDH.cs">
+      <DependentUpon>QLYGIAY.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DANHGIA.cs">
       <DependentUpon>QLYGIAY.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DATHANG.cs">
@@ -177,15 +186,6 @@
       <DependentUpon>QLYGIAY.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SANPHAM.cs">
-      <DependentUpon>QLYGIAY.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>QLYGIAY.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>QLYGIAY.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QLYGIAY.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAIXE.cs">
